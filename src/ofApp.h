@@ -1,13 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include <opencv2/core/core.hpp>
-#include <opencv2/opencv.hpp>
-#include <opencv2/videoio/videoio.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/video.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/videoio/videoio.hpp>
+#include "ofxCv.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -27,5 +22,12 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    cv::VideoCapture cap;
+		
+    ofVideoGrabber cam;
+    ofxCv::RunningBackground background;
+    ofImage thresholded;
+    
+    ofxPanel gui;
+    ofParameter<bool> resetBackground;
+    ofParameter<float> learningTime, thresholdValue;
 };

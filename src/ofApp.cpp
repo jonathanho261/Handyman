@@ -1,21 +1,29 @@
 #include "ofApp.h"
 
+using namespace cv;
+using namespace ofxCv;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
-    if (!cap.open(0)) {
-        std::cout << "An error has occured." << std::endl;
-    }
-    std::cout << "Opened" << std::endl;
+    cam.setup(640, 480);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
+    cam.update();
+    if(resetBackground) {
+        background.reset();
+        resetBackground = false;
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+    cam.draw(0, 0);
+    if(thresholded.isAllocated()) {
+        thresholded.draw(640, 0);
+    }
+    gui.draw();
 }
 
 //--------------------------------------------------------------
