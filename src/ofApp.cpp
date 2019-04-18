@@ -5,30 +5,54 @@ using namespace ofxCv;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    cam.setup(640, 480);
+    
+    bLearnBackground = false;
+    
+    vidGrabber.setVerbose(true);
+    vidGrabber.initGrabber(320,240);
+    
+    colorImg.allocate(320,240);
+    grayImage.allocate(320,240);
+    grayBg.allocate(320,240);
+    grayDiff.allocate(320,240);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    cam.update();
-    if(resetBackground) {
-        background.reset();
-        resetBackground = false;
+    vidGrabber.update();
+    if (vidGrabber.isFrameNew()){
+        colorImg.setFromPixels(vidGrabber.getPixels());
+        grayImage = colorImg; // convert our color image to a grayscale image
+        if (bLearnBackground == true) {
+            grayBg = grayImage; // update the background image
+            bLearnBackground = false;
+        }
+        grayDiff.absDiff(grayBg, grayImage);
+        grayDiff.threshold(30);
+        contourFinder.findContours(grayDiff, 5, (340*240)/4, 4, false, true);
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    cam.draw(0, 0);
-    if(thresholded.isAllocated()) {
-        thresholded.draw(640, 0);
+    ofSetHexColor(0xffffff);
+    colorImg.draw(0, 0, 320, 240);
+    grayDiff.draw(0, 240, 320, 240);
+    ofDrawRectangle(320, 0, 320, 240);
+    contourFinder.draw(320, 0, 320, 240);
+    ofColor c(255, 255, 255);
+    for(int i = 0; i < contourFinder.nBlobs; i++) {
+        ofRectangle r = contourFinder.blobs.at(i).boundingRect;
+        r.x += 320; r.y += 240;
+        c.setHsb(i * 64, 255, 255);
+        ofSetColor(c);
+        ofDrawRectangle(r);
     }
-    gui.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    bLearnBackground = true;
 }
 
 //--------------------------------------------------------------

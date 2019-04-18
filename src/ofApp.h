@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxCv.h"
+#include "ofxOpenCv.h"
 #include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
@@ -22,12 +23,18 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
-    ofVideoGrabber cam;
-    ofxCv::RunningBackground background;
-    ofImage thresholded;
     
-    ofxPanel gui;
-    ofParameter<bool> resetBackground;
-    ofParameter<float> learningTime, thresholdValue;
+    bool bLearnBackground;
+    ofVideoGrabber vidGrabber;
+    ofxCvColorImage colorImg;
+    ofxCvGrayscaleImage grayImage, grayBg, grayDiff;
+    ofxCvContourFinder contourFinder;
+		
+//    ofVideoGrabber cam;
+//    ofxCv::RunningBackground background;
+//    ofImage thresholded;
+//
+//    ofxPanel gui;
+//    ofParameter<bool> resetBackground;
+//    ofParameter<float> learningTime, thresholdValue;
 };
