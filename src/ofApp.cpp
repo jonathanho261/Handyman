@@ -1,3 +1,5 @@
+//sources: https://www.opencv-srf.com/2010/09/object-detection-using-color-seperation.html
+
 #include "ofApp.h"
 
 using namespace cv;
@@ -15,6 +17,17 @@ void ofApp::setup(){
     grayImage.allocate(320,240);
     grayBg.allocate(320,240);
     grayDiff.allocate(320,240);
+    
+    gui.setup();
+    gui.add(lowH.set("lowH", 0, 0, 179));
+    gui.add(highH.set("highH", 0, 0, 179));
+    gui.add(lowS.set("lowS", 0, 0, 255));
+    gui.add(highS.set("highS", 0, 0, 255));
+    gui.add(lowV.set("lowV", 0, 0, 255));
+    gui.add(highV.set("highV", 0, 0, 255));
+    
+    image.allocate(320,240);
+    image.convertRgbToHsv();
 }
 
 //--------------------------------------------------------------
@@ -31,6 +44,8 @@ void ofApp::update(){
         grayDiff.threshold(30);
         contourFinder.findContours(grayDiff, 5, (340*240)/4, 4, false, true);
     }
+    
+    image.setFromPixels(vidGrabber.getPixels());
 }
 
 //--------------------------------------------------------------
@@ -44,10 +59,30 @@ void ofApp::draw(){
     for(int i = 0; i < contourFinder.nBlobs; i++) {
         ofRectangle r = contourFinder.blobs.at(i).boundingRect;
         r.x += 320; r.y += 240;
-        c.setHsb(i * 64, 255, 255);
-        ofSetColor(c);
-        ofDrawRectangle(r);
+        //c.setHsb(i * 64, 255, 255);
+        //ofSetColor(c);
+        //ofDrawRectangle(r);
     }
+    
+    Mat orignalImg = toCv(image);
+    
+    Mat imgHSV;
+    cvtColor(orignalImg, imgHSV, COLOR_BGR2HSV);
+    
+    Mat thresholdedImg;
+    inRange(imgHSV, Scalar(lowH, lowS, lowV), Scalar(highH, highS, highV), thresholdedImg);
+    
+    //remove small objects in foreground
+    erode(thresholdedImg, thresholdedImg, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)));
+    dilate(thresholdedImg, thresholdedImg, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)));
+    
+    //remove holes in foreground
+    dilate(thresholdedImg, thresholdedImg, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)));
+    erode(thresholdedImg, thresholdedImg, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)));
+    
+    
+    gui.draw();
+    drawMat(thresholdedImg, 320, 240);
 }
 
 //--------------------------------------------------------------

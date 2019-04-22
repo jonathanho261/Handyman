@@ -29,12 +29,9 @@ class ofApp : public ofBaseApp{
     ofxCvColorImage colorImg;
     ofxCvGrayscaleImage grayImage, grayBg, grayDiff;
     ofxCvContourFinder contourFinder;
-		
-//    ofVideoGrabber cam;
-//    ofxCv::RunningBackground background;
-//    ofImage thresholded;
-//
-//    ofxPanel gui;
-//    ofParameter<bool> resetBackground;
-//    ofParameter<float> learningTime, thresholdValue;
+    
+    ofxPanel gui;
+    ofParameter<float> lowH, highH, lowS, highS, lowV, highV;
+    ofxCvColorImage image;
+    ofImage displayImage;
 };

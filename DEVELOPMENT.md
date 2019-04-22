@@ -27,3 +27,17 @@
 4. Worked through linker errors.
 5. Got webcam to show up -> getting progress. Now we can actually start coding. (will add code from test project to this project in next commit)
 
+(April 19, 2019)
+1. Experimented with background learning and contour finding.
+2. Added functionality where user can click a key to learn the background. Then, when there is movement, a panel will show the difference between the learned background and the user's movement.
+3. Started playing around with detecting HSV colors. Hardcoded certain HSV values for a green glove and used the mouse to detect if the glove was found or not.
+** Main take-aways from today: figured out background learning and detecting user's movements. Learned about HSV.
+
+(April 20, 2019)
+1. Enhanced HSV detection. Have a broader range of values to detect the HSV values for the green glove.
+
+(April 21, 2019)
+1. Figured out how to only get a range of HSV colors with a scrollbar. 
+2. Now can isolate the glove as the foreground and eliminate the face of the user and the background.
+**Next goal: intertwine the detecting movement (with the learned background) and the isolation of the glove to detect only the movements of the glove.
+
