@@ -25,23 +25,7 @@ void Handyman::update(){
 
 //--------------------------------------------------------------
 void Handyman::draw(){
-    ofSetHexColor(0xffffff);
-    cameraImage.draw(0, 0, 320, 240);
-    grayDiff.draw(0, 240, 320, 240);
-    ofDrawRectangle(320, 0, 320, 240);
-    contourFinder.draw(320, 0, 320, 240);
-    
-    hsvValues.draw();
-    
-    std::unique_ptr<cv::Mat> thresholdedImagePtr = updateHandPosition();
-    contourHandPosition(*thresholdedImagePtr);
-    drawMat(*thresholdedImagePtr, 320, 240);
-    
-    for(int i = 0; i < contourFinder.nBlobs; i++) {
-        ofRectangle r = contourFinder.blobs.at(i).boundingRect;
-    }
-    
-    hsvValues.draw();
+    drawThresholdedImage();
 }
 
 //--------------------------------------------------------------
@@ -109,8 +93,9 @@ void Handyman::setupVideoProcessing() {
     
     cameraImage.allocate(320,240);
     grayImage.allocate(320,240);
+    displayImage.allocate(320, 240, OF_IMAGE_COLOR);
     learnedBackground.allocate(320,240);
-    grayDiff.allocate(320,240);
+    differences.allocate(320,240);
     cameraImage.convertRgbToHsv();
 }
 
@@ -129,10 +114,8 @@ std::unique_ptr<cv::Mat> Handyman::updateHandPosition() {
     Mat hsvImage;
     cvtColor(orignalImage, hsvImage, COLOR_BGR2HSV);
     
-    //std::cout << "M = "<< std::endl << " "  << hsvImage << std::endl << std::endl;
-    
     Mat thresholdedImage;
-    inRange(hsvImage, Scalar(8.95, lowS, lowV), Scalar(60.13, 255, 255), thresholdedImage);
+    inRange(hsvImage, Scalar(lowH, lowS, lowV), Scalar(highH, highS, highV), thresholdedImage);
     
     //remove small objects in foreground
     erode(thresholdedImage, thresholdedImage, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)));
@@ -148,21 +131,29 @@ std::unique_ptr<cv::Mat> Handyman::updateHandPosition() {
 void Handyman::contourHandPosition(cv::Mat thresholdedImage) {
     Mat grayMat = toCv(grayImage);
     Mat backgroundMat = toCv(learnedBackground);
-    //Mat differenceMat = toCv(grayDiff);
+    Mat differenceMat = toCv(displayImage);
     if (webcam.isFrameNew()){
         grayMat = thresholdedImage;
         if (hasLearnedBackground == true) {
             backgroundMat = grayMat; // update the background image
             hasLearnedBackground = false;
         }
-        grayDiff.absDiff(learnedBackground, grayImage);
-        grayDiff.threshold(30);
-        contourFinder.findContours(grayDiff, 5, (340*240)/4, 4, false, true);
+        absdiff(backgroundMat, thresholdedImage, differenceMat);
+        contourFinder.findContours(differenceMat);
     }
 }
 
 void Handyman::drawThresholdedImage() {
+    ofSetHexColor(0xffffff);
+    cameraImage.draw(0, 0, 320, 240);
+    contourFinder.draw();
     
+    hsvValues.draw();
+    
+    std::unique_ptr<cv::Mat> thresholdedImagePtr = updateHandPosition();
+    contourHandPosition(*thresholdedImagePtr);
+    drawMat(*thresholdedImagePtr, 320, 0);
+
 }
 
 

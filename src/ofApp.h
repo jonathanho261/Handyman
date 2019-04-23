@@ -30,8 +30,10 @@ class Handyman : public ofBaseApp{
     bool hasLearnedBackground;
     ofVideoGrabber webcam;
     ofxCvColorImage cameraImage;
-    ofxCvGrayscaleImage grayImage, learnedBackground, grayDiff;
-    ofxCvContourFinder contourFinder;
+    ofxCvGrayscaleImage grayImage, learnedBackground;
+    ofImage displayImage;
+    ofxCvGrayscaleImage differences;
+    ofxCv::ContourFinder contourFinder;
     
     //private fields for changing HSV values
     ofxPanel hsvValues;
