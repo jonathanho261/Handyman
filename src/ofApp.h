@@ -5,7 +5,9 @@
 #include "ofxOpenCv.h"
 #include "ofxGui.h"
 
-class ofApp : public ofBaseApp{
+enum Directions {UP, DOWN, LEFT, RIGHT};
+
+class Handyman : public ofBaseApp{
 
 	public:
 		void setup();
@@ -24,14 +26,21 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    bool bLearnBackground;
-    ofVideoGrabber vidGrabber;
-    ofxCvColorImage colorImg;
-    ofxCvGrayscaleImage grayImage, grayBg, grayDiff;
+    //private fields for detecting the hand
+    bool hasLearnedBackground;
+    ofVideoGrabber webcam;
+    ofxCvColorImage cameraImage;
+    ofxCvGrayscaleImage grayImage, learnedBackground, grayDiff;
     ofxCvContourFinder contourFinder;
     
-    ofxPanel gui;
+    //private fields for changing HSV values
+    ofxPanel hsvValues;
     ofParameter<float> lowH, highH, lowS, highS, lowV, highV;
-    ofxCvColorImage image;
-    ofImage displayImage;
+    
+    //private helper methods for hand motion tracking
+    void setupVideoProcessing();
+    void setupHsvGui();
+    std::unique_ptr<cv::Mat> updateHandPosition();
+    void contourHandPosition(cv::Mat thresholdedImage);
+    void drawThresholdedImage();
 };
