@@ -21,11 +21,34 @@ void Handyman::update(){
     if (webcam.isFrameNew()) {
         cameraImage.setFromPixels(webcam.getPixels());
     }
+    if (contourFinder.size() > 0) {
+        ofVec2f velocity = toOf(contourFinder.getVelocity(0));
+        if (velocity.x >= 30) {
+            std::cout << "RIGHT" << std::endl;
+        }
+        else if (velocity.x <= -30) {
+            std::cout << "LEFT" << std::endl;
+        }
+        else if (velocity.y >= 30) {
+            std::cout << "UP" << std::endl;
+        }
+        else if (velocity.y <= -30) {
+            std::cout << "DOWN" << std::endl;
+        }
+    }
+    
 }
 
 //--------------------------------------------------------------
 void Handyman::draw(){
     drawThresholdedImage();
+    //for (int i = 0; i < contourFinder.size(); i++) {
+    
+    if (contourFinder.size() > 0) {
+        ofSetColor(255, 0, 0);
+        ofPoint currentCentroid = toOf(contourFinder.getCentroid(0));
+        ofDrawEllipse(currentCentroid.x, currentCentroid.y, 10.0, 10.0);
+    }
 }
 
 //--------------------------------------------------------------

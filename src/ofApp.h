@@ -34,6 +34,7 @@ class Handyman : public ofBaseApp{
     ofImage displayImage;
     ofxCvGrayscaleImage differences;
     ofxCv::ContourFinder contourFinder;
+    ofPoint centroid;
     
     //private fields for changing HSV values
     ofxPanel hsvValues;
