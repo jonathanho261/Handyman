@@ -46,4 +46,8 @@ class Handyman : public ofBaseApp{
     std::unique_ptr<cv::Mat> updateHandPosition();
     void contourHandPosition(cv::Mat thresholdedImage);
     void drawThresholdedImage();
+    
+    //find ContourFinder helper methods
+    ofPoint findAverageCentroid(ofPoint averageCentroid);
+    ofVec2f findAverageVelocity(ofVec2f averageVelocity);
 };

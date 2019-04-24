@@ -22,18 +22,19 @@ void Handyman::update(){
         cameraImage.setFromPixels(webcam.getPixels());
     }
     if (contourFinder.size() > 0) {
-        ofVec2f velocity = toOf(contourFinder.getVelocity(0));
+        ofVec2f velocity;
+        velocity = findAverageVelocity(velocity);
         if (velocity.x >= 30) {
-            std::cout << "RIGHT" << std::endl;
-        }
-        else if (velocity.x <= -30) {
             std::cout << "LEFT" << std::endl;
         }
+        else if (velocity.x <= -30) {
+            std::cout << "RIGHT" << std::endl;
+        }
         else if (velocity.y >= 30) {
-            std::cout << "UP" << std::endl;
+            std::cout << "DOWN" << std::endl;
         }
         else if (velocity.y <= -30) {
-            std::cout << "DOWN" << std::endl;
+            std::cout << "UP" << std::endl;
         }
     }
     
@@ -46,8 +47,9 @@ void Handyman::draw(){
     
     if (contourFinder.size() > 0) {
         ofSetColor(255, 0, 0);
-        ofPoint currentCentroid = toOf(contourFinder.getCentroid(0));
-        ofDrawEllipse(currentCentroid.x, currentCentroid.y, 10.0, 10.0);
+        ofPoint averageCentroid;
+        averageCentroid = findAverageCentroid(averageCentroid);
+        ofDrawEllipse(averageCentroid.x, averageCentroid.y, 10.0, 10.0);
     }
 }
 
@@ -178,5 +180,26 @@ void Handyman::drawThresholdedImage() {
     drawMat(*thresholdedImagePtr, 320, 0);
 
 }
+ofPoint Handyman::findAverageCentroid(ofPoint averageCentroid) {
+    averageCentroid.x = 0; averageCentroid.y = 0;
+    for (int i = 0; i < contourFinder.size(); i++) {
+        ofPoint currentCentroid = toOf(contourFinder.getCentroid(i));
+        averageCentroid.x += currentCentroid.x;
+        averageCentroid.y += currentCentroid.y;
+    }
+    averageCentroid.x /= contourFinder.size();
+    averageCentroid.y /= contourFinder.size();
+    return averageCentroid;
+}
 
-
+ofVec2f Handyman::findAverageVelocity(ofVec2f averageVelocity) {
+    averageVelocity.x = 0; averageVelocity.y = 0;
+    for (int i = 0; i < contourFinder.size(); i++) {
+        ofVec2f currentVelocity = toOf(contourFinder.getVelocity(0));
+        averageVelocity.x += currentVelocity.x;
+        averageVelocity.y += currentVelocity.y;
+    }
+    averageVelocity.x /= contourFinder.size();
+    averageVelocity.y /= contourFinder.size();
+    return averageVelocity;
+}
