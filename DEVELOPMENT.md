@@ -41,3 +41,13 @@
 2. Now can isolate the glove as the foreground and eliminate the face of the user and the background.
 **Next goal: intertwine the detecting movement (with the learned background) and the isolation of the glove to detect only the movements of the glove.
 
+
+(April 22, 2019)
+1. Reorganized code so that it is in better coding practices.
+2. Attempted to merge isolated foreground with contour drawing.
+
+(April 23, 2019)
+1. Successfully draws coutours based on isolated glove through the HSV color isolation
+2. Added centriod drawing to hand
+3. Started playing with reading if the hand is going left/right/up/down. Still very buggy, will continue to work on it later.
+
