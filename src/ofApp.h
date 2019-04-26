@@ -5,6 +5,8 @@
 #include "ofxOpenCv.h"
 #include "ofxGui.h"
 
+#include "game.h"
+
 enum Directions {UP, DOWN, LEFT, RIGHT};
 
 class Handyman : public ofBaseApp{
@@ -27,7 +29,6 @@ class Handyman : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     //private fields for detecting the hand
-    bool hasLearnedBackground;
     ofVideoGrabber webcam;
     ofxCvColorImage cameraImage;
     ofxCvGrayscaleImage grayImage, learnedBackground;
@@ -45,9 +46,13 @@ class Handyman : public ofBaseApp{
     void setupHsvGui();
     std::unique_ptr<cv::Mat> updateHandPosition();
     void contourHandPosition(cv::Mat thresholdedImage);
+    void registerUserMotion(ofVec2f);
     void drawThresholdedImage();
     
     //find ContourFinder helper methods
     ofPoint findAverageCentroid(ofPoint averageCentroid);
     ofVec2f findAverageVelocity(ofVec2f averageVelocity);
+    
+    //Game engine fields
+    GameEngine game;
 };

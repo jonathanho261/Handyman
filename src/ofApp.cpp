@@ -7,12 +7,12 @@ using namespace ofxCv;
 
 //--------------------------------------------------------------
 void Handyman::setup(){
-    hasLearnedBackground = false;
     setupVideoProcessing();
     
     hsvValues.setup();
     setupHsvGui();
     
+    game.setup();
 }
 
 //--------------------------------------------------------------
@@ -24,26 +24,15 @@ void Handyman::update(){
     if (contourFinder.size() > 0) {
         ofVec2f velocity;
         velocity = findAverageVelocity(velocity);
-        if (velocity.x >= 30) {
-            std::cout << "LEFT" << std::endl;
-        }
-        else if (velocity.x <= -30) {
-            std::cout << "RIGHT" << std::endl;
-        }
-        else if (velocity.y >= 30) {
-            std::cout << "DOWN" << std::endl;
-        }
-        else if (velocity.y <= -30) {
-            std::cout << "UP" << std::endl;
-        }
+        registerUserMotion(velocity);
     }
     
+    game.update();
 }
 
 //--------------------------------------------------------------
 void Handyman::draw(){
     drawThresholdedImage();
-    //for (int i = 0; i < contourFinder.size(); i++) {
     
     if (contourFinder.size() > 0) {
         ofSetColor(255, 0, 0);
@@ -51,13 +40,14 @@ void Handyman::draw(){
         averageCentroid = findAverageCentroid(averageCentroid);
         ofDrawEllipse(averageCentroid.x, averageCentroid.y, 10.0, 10.0);
     }
+    
+    ofSetHexColor(0xffffff);
+    game.draw();
 }
 
 //--------------------------------------------------------------
 void Handyman::keyPressed(int key){
-    if (key == 32) {
-        hasLearnedBackground = true;
-    }
+    
 }
 
 //--------------------------------------------------------------
@@ -159,12 +149,23 @@ void Handyman::contourHandPosition(cv::Mat thresholdedImage) {
     Mat differenceMat = toCv(displayImage);
     if (webcam.isFrameNew()){
         grayMat = thresholdedImage;
-        if (hasLearnedBackground == true) {
-            backgroundMat = grayMat; // update the background image
-            hasLearnedBackground = false;
-        }
         absdiff(backgroundMat, thresholdedImage, differenceMat);
         contourFinder.findContours(differenceMat);
+    }
+}
+
+void Handyman::registerUserMotion(ofVec2f velocity) {
+    if (velocity.x >= 30) {
+        std::cout << "LEFT" << std::endl;
+    }
+    else if (velocity.x <= -30) {
+        std::cout << "RIGHT" << std::endl;
+    }
+    else if (velocity.y >= 30) {
+        std::cout << "DOWN" << std::endl;
+    }
+    else if (velocity.y <= -30) {
+        std::cout << "UP" << std::endl;
     }
 }
 
@@ -178,8 +179,8 @@ void Handyman::drawThresholdedImage() {
     std::unique_ptr<cv::Mat> thresholdedImagePtr = updateHandPosition();
     contourHandPosition(*thresholdedImagePtr);
     drawMat(*thresholdedImagePtr, 320, 0);
-
 }
+
 ofPoint Handyman::findAverageCentroid(ofPoint averageCentroid) {
     averageCentroid.x = 0; averageCentroid.y = 0;
     for (int i = 0; i < contourFinder.size(); i++) {
