@@ -51,3 +51,11 @@
 2. Added centriod drawing to hand
 3. Started playing with reading if the hand is going left/right/up/down. Still very buggy, will continue to work on it later.
 
+(April 24, 2019) 
+1. Added finding average of all contours for centroid and velocity -> thus making hand reading significantly more accurate and reliable
+
+(April 25, 2019)
+1. Added game file and dino file
+2. Game file now just addes the ground into the background
+3. Dino file now animates the dinosaur by moving it's leg up and down
+**Next goal, get dino game to animate with cactus. Final step is to link dino game with hand movement
