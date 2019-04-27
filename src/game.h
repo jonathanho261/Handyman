@@ -8,6 +8,8 @@
 #pragma once
 #include "ofMain.h"
 #include "dino.h"
+#include "ground.h"
+#include <tuple>
 
 class GameEngine {
 public:
@@ -20,6 +22,8 @@ public:
     
 private:
     Dinosaur dino;
-    ofImage ground;
+    Ground ground1;
+    Ground ground2;
     int score;
+
 };

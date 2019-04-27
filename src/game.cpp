@@ -14,15 +14,19 @@ GameEngine::GameEngine() {
 
 void GameEngine::setup() {
     dino.setup();
-    ground.load("ground.png");
-    ground.draw(50, 400, 300, 10);
+    ground1.setup(45, 445);
+    ground2.setup(445, 445);
 }
 
 void GameEngine::update() {
     dino.update();
+    ground1.update();
+    ground2.update();
 }
 
 void GameEngine::draw() {
+    ofDrawRectangle(25, 385, 650, 150);
+    ground1.draw();
+    ground2.draw();
     dino.draw();
-    ground.draw(50, 400, 300, 10);
 }

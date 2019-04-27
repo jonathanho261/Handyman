@@ -28,6 +28,7 @@
 		C602002DE761F9B52DB4400A /* ObjectFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE75A3FBA2C2D87D14F06FE6 /* ObjectFinder.cpp */; };
 		D129D3462272873B005E4579 /* dino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D129D3452272873B005E4579 /* dino.cpp */; };
 		D129D34A22728F2A005E4579 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D129D34922728F2A005E4579 /* game.cpp */; };
+		D1479BE822740B29001558C4 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1479BE722740B29001558C4 /* ground.cpp */; };
 		D1F568FB22693D9E00E6B08D /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F568D822693D9E00E6B08D /* opencv.a */; };
 		D1F568FC22693D9E00E6B08D /* libopencv_photo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F568DA22693D9E00E6B08D /* libopencv_photo.a */; };
 		D1F568FD22693D9E00E6B08D /* libopencv_calib3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F568DB22693D9E00E6B08D /* libopencv_calib3d.a */; };
@@ -385,6 +386,8 @@
 		D129D34722728B01005E4579 /* dino.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dino.h; sourceTree = "<group>"; };
 		D129D34822728F19005E4579 /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
 		D129D34922728F2A005E4579 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		D1479BE622740ADC001558C4 /* ground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ground.h; sourceTree = "<group>"; };
+		D1479BE722740B29001558C4 /* ground.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
 		D1BDA9222269073A00F0B17A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D1BDA9232269073A00F0B17A /* PROPOSAL.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PROPOSAL.md; sourceTree = "<group>"; };
 		D1BDA924226907AC00F0B17A /* DEVELOPMENT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = DEVELOPMENT.md; sourceTree = "<group>"; };
@@ -2458,6 +2461,7 @@
 			children = (
 				D129D34722728B01005E4579 /* dino.h */,
 				D129D34822728F19005E4579 /* game.h */,
+				D1479BE622740ADC001558C4 /* ground.h */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 			);
 			name = include;
@@ -2846,6 +2850,7 @@
 				D1FDB5A3226E917400786EBB /* include */,
 				D129D3452272873B005E4579 /* dino.cpp */,
 				D129D34922728F2A005E4579 /* game.cpp */,
+				D1479BE722740B29001558C4 /* ground.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 			);
@@ -3092,6 +3097,7 @@
 				852E0891794923EE7583C621 /* ofxInputField.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
+				D1479BE822740B29001558C4 /* ground.cpp in Sources */,
 				D129D3462272873B005E4579 /* dino.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				D129D34A22728F2A005E4579 /* game.cpp in Sources */,
