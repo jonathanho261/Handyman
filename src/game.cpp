@@ -25,6 +25,7 @@ void GameEngine::update() {
 }
 
 void GameEngine::draw() {
+    //draw background
     ofDrawRectangle(25, 385, 650, 150);
     ground1.draw();
     ground2.draw();

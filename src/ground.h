@@ -17,6 +17,7 @@ public:
     void draw();
     
 private:
-    int initialX, initialY, xPos;
+    int initialX, initialY, xPosition;
     ofImage ground;
+    int moveSpeed;
 };

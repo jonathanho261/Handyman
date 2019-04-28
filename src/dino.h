@@ -25,6 +25,7 @@ private:
     int animationChange;
     
     int yPosition;
+    int jumpSpeed;
     bool isJumping;
     bool isDescending;
     bool isDucking;

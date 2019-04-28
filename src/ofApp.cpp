@@ -47,9 +47,7 @@ void Handyman::draw(){
 
 //--------------------------------------------------------------
 void Handyman::keyPressed(int key){
-    if (key == ' ') {
-        game.jump();
-    }
+    
 }
 
 //--------------------------------------------------------------
@@ -168,6 +166,7 @@ void Handyman::registerUserMotion(ofVec2f velocity) {
     }
     else if (velocity.y <= -30) {
         std::cout << "UP" << std::endl;
+        game.jump();
     }
 }
 

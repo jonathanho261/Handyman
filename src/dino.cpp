@@ -10,14 +10,15 @@
 
 Dinosaur::Dinosaur() {
     isDino1 = true;
-    animationChange = 0;
-    yPosition = 400;
     isDescending = false;
 }
 
 void Dinosaur::setup() {
     dinoSprite1.load("dino1.png");
     dinoSprite2.load("dino2.png");
+    animationChange = 0;
+    yPosition = 400;
+    jumpSpeed = 2;
 }
 
 void Dinosaur::update() {
@@ -33,9 +34,9 @@ void Dinosaur::update() {
             isDescending = false;
         }
         if (isDescending) {
-            yPosition += 2;
+            yPosition += jumpSpeed;
         } else if (yPosition > jumpPeak) {
-            yPosition -= 2;
+            yPosition -= jumpSpeed;
         } else {
             isDescending = true;
         }
@@ -52,5 +53,5 @@ void Dinosaur::draw() {
 
 void Dinosaur::jump() {
     isJumping = true;
-    yPosition -= 2;
+    yPosition -= jumpSpeed;
 }

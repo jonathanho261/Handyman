@@ -15,15 +15,18 @@ Ground::Ground() {
 void Ground::setup(int x, int y) {
     initialX = x;
     initialY = y;
+    moveSpeed = 2;
 }
 
 void Ground::update() {
-    xPos += 2;
-    if (xPos == 400) {
-        xPos = 0;
+    int resetThreshold = 400;
+    int speedIncreaseFactor = 0.01;
+    xPosition += (moveSpeed + speedIncreaseFactor);
+    if (xPosition == resetThreshold) {
+        xPosition = 0;
     }
 }
 
 void Ground::draw() {
-    ground.draw(initialX - xPos, initialY, 630, 20);
+    ground.draw(initialX - xPosition, initialY, 630, 20);
 }
