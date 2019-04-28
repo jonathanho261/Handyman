@@ -20,8 +20,10 @@ public:
     void draw();
     void reset();
     
-    //temp method
+    //control methods
     void jump();
+    void duck();
+    void stopDucking();
     
 private:
     Dinosaur dino;

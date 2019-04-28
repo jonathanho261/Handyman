@@ -17,10 +17,13 @@ public:
     void draw();
     void jump();
     void duck();
+    void stopDucking();
     
 private:
     ofImage dinoSprite1;
     ofImage dinoSprite2;
+    ofImage duckDino1;
+    ofImage duckDino2;
     bool isDino1;
     int animationChange;
     

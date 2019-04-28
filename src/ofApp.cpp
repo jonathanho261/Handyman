@@ -13,6 +13,9 @@ void Handyman::setup(){
     setupHsvGui();
     
     game.setup();
+    
+    duckTime = 0;
+    maxDuckTime = 50;
 }
 
 //--------------------------------------------------------------
@@ -155,16 +158,20 @@ void Handyman::contourHandPosition(cv::Mat thresholdedImage) {
 }
 
 void Handyman::registerUserMotion(ofVec2f velocity) {
+    duckTime++;
+    if (abs(velocity.x) < 30 && duckTime > maxDuckTime) {
+        game.stopDucking();
+        duckTime = 0;
+    }
     if (velocity.x >= 30) {
         std::cout << "LEFT" << std::endl;
-    }
-    else if (velocity.x <= -30) {
+        game.duck();
+    } else if (velocity.x <= -30) {
         std::cout << "RIGHT" << std::endl;
-    }
-    else if (velocity.y >= 30) {
+        game.duck();
+    } else if (velocity.y >= 30) {
         std::cout << "DOWN" << std::endl;
-    }
-    else if (velocity.y <= -30) {
+    } else if (velocity.y <= -30) {
         std::cout << "UP" << std::endl;
         game.jump();
     }
@@ -204,4 +211,8 @@ ofVec2f Handyman::findAverageVelocity(ofVec2f averageVelocity) {
     averageVelocity.x /= contourFinder.size();
     averageVelocity.y /= contourFinder.size();
     return averageVelocity;
+}
+
+void Handyman::stopDucking() {
+    game.stopDucking();
 }

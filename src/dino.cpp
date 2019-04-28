@@ -16,6 +16,8 @@ Dinosaur::Dinosaur() {
 void Dinosaur::setup() {
     dinoSprite1.load("dino1.png");
     dinoSprite2.load("dino2.png");
+    duckDino1.load("duckDino1.png");
+    duckDino2.load("duckDino2.png");
     animationChange = 0;
     yPosition = 400;
     jumpSpeed = 2;
@@ -44,14 +46,27 @@ void Dinosaur::update() {
 }
 
 void Dinosaur::draw() {
-    if (isDino1) {
+    int duckCompensation = 20;
+    if (isDino1 && !isDucking) {
         dinoSprite1.draw(50, yPosition, 60, 60);
-    } else {
+    } else if (!isDucking) {
         dinoSprite2.draw(50, yPosition, 60, 60);
+    } else if (isDino1) {
+        duckDino1.draw(50, yPosition - duckCompensation, 80, 80);
+    } else {
+        duckDino2.draw(50, yPosition - duckCompensation, 80, 80);
     }
 }
 
 void Dinosaur::jump() {
     isJumping = true;
     yPosition -= jumpSpeed;
+}
+
+void Dinosaur::duck() {
+    isDucking = true;
+}
+
+void Dinosaur::stopDucking() {
+    isDucking = false;
 }

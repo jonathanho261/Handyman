@@ -4,6 +4,7 @@
 #include "ofxCv.h"
 #include "ofxOpenCv.h"
 #include "ofxGui.h"
+#include <cstdlib>
 
 #include "game.h"
 
@@ -55,4 +56,7 @@ class Handyman : public ofBaseApp{
     
     //Game engine fields
     GameEngine game;
+    int duckTime;
+    int maxDuckTime;
+    void stopDucking();
 };

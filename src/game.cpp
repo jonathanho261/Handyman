@@ -35,3 +35,11 @@ void GameEngine::draw() {
 void GameEngine::jump() {
     dino.jump();
 }
+
+void GameEngine::duck() {
+    dino.duck();
+}
+
+void GameEngine::stopDucking() {
+    dino.stopDucking();
+}
