@@ -9,7 +9,7 @@
 #include "ofMain.h"
 #include "dino.h"
 #include "ground.h"
-#include <tuple>
+#include "cactus.h"
 
 class GameEngine {
 public:
@@ -19,6 +19,9 @@ public:
     void update();
     void draw();
     void reset();
+    
+    //temp method
+    void jump();
     
 private:
     Dinosaur dino;

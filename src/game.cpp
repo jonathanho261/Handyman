@@ -30,3 +30,7 @@ void GameEngine::draw() {
     ground2.draw();
     dino.draw();
 }
+
+void GameEngine::jump() {
+    dino.jump();
+}
