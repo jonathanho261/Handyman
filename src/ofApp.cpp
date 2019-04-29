@@ -13,6 +13,7 @@ void Handyman::setup(){
     setupHsvGui();
     
     game.setup();
+    isGameInProgress = false;
     
     duckTime = 0;
     maxDuckTime = 50;
@@ -27,10 +28,13 @@ void Handyman::update(){
     if (contourFinder.size() > 0) {
         ofVec2f velocity;
         velocity = findAverageVelocity(velocity);
-        registerUserMotion(velocity);
+        if (isGameInProgress) {
+            registerUserMotion(velocity);
+        }
     }
-    
-    game.update();
+    if (isGameInProgress) {
+        game.update();
+    }
 }
 
 //--------------------------------------------------------------
@@ -45,7 +49,13 @@ void Handyman::draw(){
     }
     
     ofSetHexColor(0xffffff);
-    game.draw();
+    if (isGameInProgress) {
+        game.draw();
+    }
+    
+    ofDrawRectRounded(250, 265, 150, 75, 25);
+    ofSetColor(0, 0, 0);
+    ofDrawBitmapString("Start!", 300, 310);
 }
 
 //--------------------------------------------------------------
@@ -71,6 +81,11 @@ void Handyman::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void Handyman::mousePressed(int x, int y, int button){
     std::cout << "(" << x << ", " << y << ")" << std::endl;
+    if (x >= 250 && x <= 400 && y >= 265 && y <= 340) {
+        isGameInProgress = true;
+        game.startGame();
+        std::cout << "game started" << std::endl;
+    }
 }
 
 //--------------------------------------------------------------

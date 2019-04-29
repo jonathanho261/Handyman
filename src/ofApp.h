@@ -29,6 +29,7 @@ class Handyman : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+private:
     //private fields for detecting the hand
     ofVideoGrabber webcam;
     ofxCvColorImage cameraImage;
@@ -56,6 +57,8 @@ class Handyman : public ofBaseApp{
     
     //Game engine fields
     GameEngine game;
+    ofTrueTypeFont font;
+    bool isGameInProgress;
     int duckTime;
     int maxDuckTime;
     void stopDucking();

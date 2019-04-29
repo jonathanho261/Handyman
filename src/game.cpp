@@ -10,7 +10,7 @@
 
 GameEngine::GameEngine() {
     score = 0;
-    isGameInProgress = true;
+    isGameInProgress = false;
     isGameOver = false;
 }
 
@@ -23,6 +23,7 @@ void GameEngine::setup() {
     Cactus firstCactus;
     firstCactus.setup(1);
     cacti.push_back(firstCactus);
+    
 }
 
 void GameEngine::update() {
@@ -34,6 +35,7 @@ void GameEngine::update() {
         if (collisionOccurance()) {
             isGameOver = true;
         }
+        
     }
 }
 
@@ -45,6 +47,10 @@ void GameEngine::draw() {
     for (Cactus cactus : cacti) {
         cactus.draw();
     }
+}
+
+void GameEngine::startGame() {
+    isGameInProgress = true;
 }
 
 void GameEngine::jump() {

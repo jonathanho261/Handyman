@@ -75,16 +75,16 @@ std::unique_ptr<std::vector<std::tuple<int, int>>> Dinosaur::getCriticalPoints()
     std::vector<std::tuple<int, int>> criticalPoints;
     if (!isDucking) {
         for (int i = 0; i < 10; ++i) {
-            criticalPoints.push_back(std::make_tuple(xPosition + 34, yPosition + 35 + i)); //tail
-            criticalPoints.push_back(std::make_tuple(xPosition + 51 + i, yPosition + 35 - i)); //front
+            criticalPoints.push_back(std::make_tuple(xPosition + 34, yPosition + 33 + i)); //tail
+            criticalPoints.push_back(std::make_tuple(xPosition + 51 + i, yPosition + 33 - i)); //front
         }
         for (int i = 0; i < 2; ++i) {
-            criticalPoints.push_back(std::make_tuple(xPosition + 43 + (5 * i), yPosition + 54)); //legs
+            criticalPoints.push_back(std::make_tuple(xPosition + 43 + (5 * i), yPosition + 52)); //legs
         }
     } else {
-        criticalPoints.push_back(std::make_tuple(xPosition + 46, yPosition + 42));
-        criticalPoints.push_back(std::make_tuple(xPosition + 33, yPosition + 36));
-        criticalPoints.push_back(std::make_tuple(xPosition + 29, yPosition + 51));
+        criticalPoints.push_back(std::make_tuple(xPosition + 46, yPosition + 40));
+        criticalPoints.push_back(std::make_tuple(xPosition + 33, yPosition + 34));
+        criticalPoints.push_back(std::make_tuple(xPosition + 29, yPosition + 49));
     }
     return std::make_unique<std::vector<std::tuple<int, int>>>(criticalPoints);
 }
@@ -93,7 +93,7 @@ bool Dinosaur::hitObject(std::unique_ptr<std::vector<std::tuple<int, int>>> cact
     std::unique_ptr<std::vector<std::tuple<int, int>>> dinoCriticalPoints = getCriticalPoints();
     for (std::tuple<int, int> cactus : *cactusCriticalPoints) {
         for (std::tuple<int, int> dino : *dinoCriticalPoints) {
-            if (get<0>(cactus) == get<0>(dino) && abs(get<1>(cactus) - get<1>(dino)) <= 2) {
+            if (get<0>(cactus) == get<0>(dino) && abs(get<1>(cactus) - get<1>(dino)) <= 1) {
                 std::cout << get<0>(cactus) << " " << get<1>(cactus) << " " << get<1>(dino) << std::endl;
                 return true;
             }

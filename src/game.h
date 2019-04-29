@@ -7,7 +7,6 @@
 
 #pragma once
 #include "ofMain.h"
-#include "ofxGui.h"
 #include "dino.h"
 #include "ground.h"
 #include "cactus.h"
@@ -21,6 +20,7 @@ public:
     void setup();
     void update();
     void draw();
+    void startGame();
     void reset();
     
     //control methods
@@ -38,7 +38,6 @@ private:
     Dinosaur dino;
     Ground ground1;
     Ground ground2;
-    ofxButton startButton;
     
     void updateCactus();
     int randomNumber(int range);
