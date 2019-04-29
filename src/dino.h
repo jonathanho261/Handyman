@@ -20,8 +20,8 @@ public:
     void jump();
     void duck();
     void stopDucking();
-    std::vector<std::tuple<int, int>> getCriticalPoints();
-    bool hitObject(std::vector<std::tuple<int, int>> cactusCriticalPoints);
+    std::unique_ptr<std::vector<std::tuple<int, int>>> getCriticalPoints();
+    bool hitObject(std::unique_ptr<std::vector<std::tuple<int, int>>> cactusCriticalPoints);
     
 private:
     ofImage dinoSprite1;

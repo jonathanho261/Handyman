@@ -71,7 +71,7 @@ void Dinosaur::stopDucking() {
     isDucking = false;
 }
 
-std::vector<std::tuple<int, int>> Dinosaur::getCriticalPoints() {
+std::unique_ptr<std::vector<std::tuple<int, int>>> Dinosaur::getCriticalPoints() {
     std::vector<std::tuple<int, int>> criticalPoints;
     if (!isDucking) {
         for (int i = 0; i < 10; ++i) {
@@ -86,18 +86,18 @@ std::vector<std::tuple<int, int>> Dinosaur::getCriticalPoints() {
         criticalPoints.push_back(std::make_tuple(xPosition + 33, yPosition + 36));
         criticalPoints.push_back(std::make_tuple(xPosition + 29, yPosition + 51));
     }
-    return criticalPoints;
+    return std::make_unique<std::vector<std::tuple<int, int>>>(criticalPoints);
 }
 
-bool Dinosaur::hitObject(std::vector<std::tuple<int, int>> cactusCriticalPoints) {
-    std::vector<std::tuple<int, int>> dinoCriticalPoints = getCriticalPoints();
-    for (std::tuple<int, int> cactus : cactusCriticalPoints) {
-        for (std::tuple<int, int> dino : dinoCriticalPoints) {
+bool Dinosaur::hitObject(std::unique_ptr<std::vector<std::tuple<int, int>>> cactusCriticalPoints) {
+    std::unique_ptr<std::vector<std::tuple<int, int>>> dinoCriticalPoints = getCriticalPoints();
+    for (std::tuple<int, int> cactus : *cactusCriticalPoints) {
+        for (std::tuple<int, int> dino : *dinoCriticalPoints) {
             if (get<0>(cactus) == get<0>(dino) && abs(get<1>(cactus) - get<1>(dino)) <= 2) {
                 std::cout << get<0>(cactus) << " " << get<1>(cactus) << " " << get<1>(dino) << std::endl;
                 return true;
             }
         }
     }
-    return false;;
+    return false;
 }

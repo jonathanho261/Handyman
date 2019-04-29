@@ -7,6 +7,7 @@
 
 #pragma once
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "dino.h"
 #include "ground.h"
 #include "cactus.h"
@@ -29,6 +30,7 @@ public:
     
 private:
     int score;
+    bool isGameInProgress;
     bool isGameOver;
     int minCactusDistance;
     std::vector<Cactus> cacti;
@@ -36,6 +38,7 @@ private:
     Dinosaur dino;
     Ground ground1;
     Ground ground2;
+    ofxButton startButton;
     
     void updateCactus();
     int randomNumber(int range);

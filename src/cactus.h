@@ -17,7 +17,7 @@ public:
     void setup(int num);
     bool update();
     void draw();
-    std::vector<std::tuple<int, int>> getCriticalPoints();
+    std::unique_ptr<std::vector<std::tuple<int, int>>> getCriticalPoints();
     
 private:
     ofImage cactus;
