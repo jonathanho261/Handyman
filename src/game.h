@@ -29,13 +29,15 @@ public:
     
 private:
     int score;
+    bool isGameOver;
+    int minCactusDistance;
+    std::vector<Cactus> cacti;
     
     Dinosaur dino;
     Ground ground1;
     Ground ground2;
-
-    int minCactusDistance;
-    std::vector<Cactus> cacti;
+    
     void updateCactus();
     int randomNumber(int range);
+    bool collisionOccurance();
 };

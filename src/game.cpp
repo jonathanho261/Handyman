@@ -10,6 +10,7 @@
 
 GameEngine::GameEngine() {
     score = 0;
+    isGameOver = false;
 }
 
 void GameEngine::setup() {
@@ -24,14 +25,18 @@ void GameEngine::setup() {
 }
 
 void GameEngine::update() {
-    dino.update();
-    ground1.update();
-    ground2.update();
-    updateCactus();
+    if (!isGameOver) {
+        dino.update();
+        ground1.update();
+        ground2.update();
+        updateCactus();
+        if (collisionOccurance()) {
+            isGameOver = true;
+        }
+    }
 }
 
 void GameEngine::draw() {
-    //draw background
     ofDrawRectangle(25, 360, 650, 150);
     ground1.draw();
     ground2.draw();
@@ -75,4 +80,14 @@ void GameEngine::updateCactus() {
 
 int GameEngine::randomNumber(int range) {
     return rand() % range + 1;
+}
+
+bool GameEngine::collisionOccurance() {
+    for (Cactus cactus : cacti) {
+        std::vector<std::tuple<int, int>> cactusCriticalPoints = cactus.getCriticalPoints();
+        if (dino.hitObject(cactusCriticalPoints)) {
+            return true;
+        }
+    }
+    return false;
 }

@@ -70,7 +70,7 @@ void Handyman::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void Handyman::mousePressed(int x, int y, int button){
-    
+    std::cout << "(" << x << ", " << y << ")" << std::endl;
 }
 
 //--------------------------------------------------------------

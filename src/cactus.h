@@ -7,6 +7,8 @@
 
 #pragma once
 #include "ofMain.h"
+#include <vector>
+#include <tuple>
 
 class Cactus {
 public:
@@ -15,7 +17,7 @@ public:
     void setup(int num);
     bool update();
     void draw();
-    void getArea();
+    std::vector<std::tuple<int, int>> getCriticalPoints();
     
 private:
     ofImage cactus;

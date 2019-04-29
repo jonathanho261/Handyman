@@ -7,6 +7,8 @@
 
 #pragma once
 #include "ofMain.h"
+#include <vector>
+#include <tuple>
 
 class Dinosaur {
 public:
@@ -18,6 +20,8 @@ public:
     void jump();
     void duck();
     void stopDucking();
+    std::vector<std::tuple<int, int>> getCriticalPoints();
+    bool hitObject(std::vector<std::tuple<int, int>> cactusCriticalPoints);
     
 private:
     ofImage dinoSprite1;
@@ -27,9 +31,11 @@ private:
     bool isDino1;
     int animationChange;
     
+    int xPosition;
     int yPosition;
     int jumpSpeed;
     bool isJumping;
     bool isDescending;
     bool isDucking;
+    const int kDuckingCompensation = 20;
 };
