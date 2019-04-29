@@ -24,12 +24,13 @@ void Cactus::setup(int num) {
     yPosition = 420;
 }
 
-void Cactus::update() {
+bool Cactus::update() {
     if (xPosition <= -5) {
-        cactus.clear();
-    } else {
-        xPosition -= 2;
+        return false;
     }
+    int speedIncreaseFactor = 0.01;
+    xPosition -= (2 + speedIncreaseFactor);
+    return true;
 }
 
 void Cactus::draw() {

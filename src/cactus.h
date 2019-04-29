@@ -13,7 +13,7 @@ public:
     Cactus();
     
     void setup(int num);
-    void update();
+    bool update();
     void draw();
     void getArea();
     

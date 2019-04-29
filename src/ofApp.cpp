@@ -159,19 +159,19 @@ void Handyman::contourHandPosition(cv::Mat thresholdedImage) {
 
 void Handyman::registerUserMotion(ofVec2f velocity) {
     duckTime++;
-    if (abs(velocity.x) < 30 && duckTime > maxDuckTime) {
+    if (abs(velocity.x) < 20 && duckTime > maxDuckTime) {
         game.stopDucking();
         duckTime = 0;
     }
-    if (velocity.x >= 30) {
+    if (velocity.x >= 20) {
         std::cout << "LEFT" << std::endl;
         game.duck();
-    } else if (velocity.x <= -30) {
+    } else if (velocity.x <= -20) {
         std::cout << "RIGHT" << std::endl;
         game.duck();
-    } else if (velocity.y >= 30) {
+    } else if (velocity.y >= 20) {
         std::cout << "DOWN" << std::endl;
-    } else if (velocity.y <= -30) {
+    } else if (velocity.y <= -20) {
         std::cout << "UP" << std::endl;
         game.jump();
     }

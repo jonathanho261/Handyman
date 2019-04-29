@@ -10,6 +10,8 @@
 #include "dino.h"
 #include "ground.h"
 #include "cactus.h"
+#include <vector>
+#include <cstdlib>
 
 class GameEngine {
 public:
@@ -26,10 +28,14 @@ public:
     void stopDucking();
     
 private:
+    int score;
+    
     Dinosaur dino;
     Ground ground1;
     Ground ground2;
-    Cactus cactus;
-    int score;
 
+    int minCactusDistance;
+    std::vector<Cactus> cacti;
+    void updateCactus();
+    int randomNumber(int range);
 };
