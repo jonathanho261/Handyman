@@ -39,8 +39,8 @@ void Cactus::draw() {
 
 std::vector<std::tuple<int, int>> Cactus::getCriticalPoints() {
     std::vector<std::tuple<int, int>> criticalPoints;
-    criticalPoints.push_back(std::make_tuple(xPosition, yPosition - 10));       //far left
-    criticalPoints.push_back(std::make_tuple(xPosition - 10, yPosition));       //top middle
-    criticalPoints.push_back(std::make_tuple(xPosition + 20, yPosition - 10));  //far right
+    criticalPoints.push_back(std::make_tuple(xPosition + 30, yPosition));       //far left
+    criticalPoints.push_back(std::make_tuple(xPosition + 20, yPosition + 10));       //top middle
+    criticalPoints.push_back(std::make_tuple(xPosition + 40, yPosition));  //far right
     return criticalPoints;
 }

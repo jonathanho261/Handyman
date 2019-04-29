@@ -75,16 +75,16 @@ std::vector<std::tuple<int, int>> Dinosaur::getCriticalPoints() {
     std::vector<std::tuple<int, int>> criticalPoints;
     if (!isDucking) {
         for (int i = 0; i < 10; ++i) {
-            criticalPoints.push_back(std::make_tuple(xPosition + 18, yPosition + 25 + i)); //tail
-            criticalPoints.push_back(std::make_tuple(xPosition + 35 + i, yPosition + 25 - i)); //front
+            criticalPoints.push_back(std::make_tuple(xPosition + 34, yPosition + 35 + i)); //tail
+            criticalPoints.push_back(std::make_tuple(xPosition + 51 + i, yPosition + 35 - i)); //front
         }
         for (int i = 0; i < 2; ++i) {
-            criticalPoints.push_back(std::make_tuple(xPosition + 27 + (5 * i), yPosition + 44)); //legs
+            criticalPoints.push_back(std::make_tuple(xPosition + 43 + (5 * i), yPosition + 54)); //legs
         }
     } else {
-        criticalPoints.push_back(std::make_tuple(xPosition + 30, yPosition + 32));
-        criticalPoints.push_back(std::make_tuple(xPosition + 17, yPosition + 26));
-        criticalPoints.push_back(std::make_tuple(xPosition + 13, yPosition + 41));
+        criticalPoints.push_back(std::make_tuple(xPosition + 46, yPosition + 42));
+        criticalPoints.push_back(std::make_tuple(xPosition + 33, yPosition + 36));
+        criticalPoints.push_back(std::make_tuple(xPosition + 29, yPosition + 51));
     }
     return criticalPoints;
 }
