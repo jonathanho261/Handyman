@@ -16,12 +16,14 @@ void GameEngine::setup() {
     dino.setup();
     ground1.setup(45, 445);
     ground2.setup(445, 445);
+    cactus.setup(1);
 }
 
 void GameEngine::update() {
     dino.update();
     ground1.update();
     ground2.update();
+    cactus.update();
 }
 
 void GameEngine::draw() {
@@ -30,6 +32,7 @@ void GameEngine::draw() {
     ground1.draw();
     ground2.draw();
     dino.draw();
+    cactus.draw();
 }
 
 void GameEngine::jump() {

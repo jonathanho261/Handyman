@@ -29,6 +29,7 @@ private:
     Dinosaur dino;
     Ground ground1;
     Ground ground2;
+    Cactus cactus;
     int score;
 
 };

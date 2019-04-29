@@ -12,8 +12,12 @@ class Cactus {
 public:
     Cactus();
     
-    void setup();
+    void setup(int num);
     void update();
     void draw();
     void getArea();
+    
+private:
+    ofImage cactus;
+    int xPosition, yPosition;
 };
