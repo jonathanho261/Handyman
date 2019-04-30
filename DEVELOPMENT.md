@@ -59,3 +59,21 @@
 2. Game file now just addes the ground into the background
 3. Dino file now animates the dinosaur by moving it's leg up and down
 **Next goal, get dino game to animate with cactus. Final step is to link dino game with hand movement
+
+(April 26, 2019) 
+1. Added update and draw to the ground so that the ground will animate and move to the left of the screen
+
+(April 28, 2019)
+1. Added animation to make the dinosuar jump (have not yet connected it to OpenCV but it works fine)
+2. Removed a lot of magic numbers for testing within the code
+3. Also added animation to make the dinosaur duck.
+**Photoshop was used to crop and edit the images of the dinosaur so that I can alternate between the two images for the animation to happen
+
+(April 29, 2019)
+1. Completed all of the cactus animation (so that random cacti show up and code takes care of removing the cacti from memory when the cactus is moves off the screen)
+2. Added collision mechanism between the cacti and the dinosaur -> game will now end if the two share a few critical points. A little buggy but I think it will do for the final project.
+3. Changed all my passing by value to unique_ptrs so that it is much more efficient.
+4. Added start button, restart functionality, and a score menu.
+
+
+Final notes: Did not add arerial obstacles because of time contraints. Collision mechanisms still a bit buggy. Lots of magic numbers inside the code (because have not found a good way to contour the edges of the transparent images so that collisions are really accurate -> all my collisions are trial and error points). Overall, the project met what I wanted to do except for the few bugs listed above. I would like to extend this project further in the future.
