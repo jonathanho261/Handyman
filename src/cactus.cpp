@@ -28,7 +28,7 @@ bool Cactus::update() {
     if (xPosition <= -5) {
         return false;
     }
-    int speedIncreaseFactor = 0.01;
+    int speedIncreaseFactor = 0.1;
     xPosition -= (2 + speedIncreaseFactor);
     return true;
 }

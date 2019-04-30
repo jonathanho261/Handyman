@@ -20,7 +20,7 @@ void Ground::setup(int x, int y) {
 
 void Ground::update() {
     int resetThreshold = 400;
-    int speedIncreaseFactor = 0.01;
+    int speedIncreaseFactor = 0.1;
     xPosition += (moveSpeed + speedIncreaseFactor);
     if (xPosition == resetThreshold) {
         xPosition = 0;
