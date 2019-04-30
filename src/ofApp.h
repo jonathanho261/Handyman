@@ -57,9 +57,9 @@ private:
     
     //Game engine fields
     GameEngine game;
-    ofTrueTypeFont font;
     bool isGameInProgress;
     int duckTime;
     int maxDuckTime;
     void stopDucking();
+    void drawStartButton();
 };

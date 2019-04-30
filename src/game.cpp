@@ -37,6 +37,7 @@ void GameEngine::update() {
         updateCactus();
         if (collisionOccurance()) {
             isGameOver = true;
+            isGameInProgress = false;
         }
     }
 }
@@ -54,6 +55,13 @@ void GameEngine::draw() {
 
 void GameEngine::startGame() {
     isGameInProgress = true;
+}
+
+void GameEngine::reset() {
+    isGameOver = false;
+    timer = 0;
+    cacti.clear();
+    setup();
 }
 
 void GameEngine::jump() {

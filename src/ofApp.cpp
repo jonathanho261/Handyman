@@ -52,10 +52,7 @@ void Handyman::draw(){
     if (isGameInProgress) {
         game.draw();
     }
-    
-    ofDrawRectRounded(250, 265, 150, 75, 25);
-    ofSetColor(0, 0, 0);
-    ofDrawBitmapString("Start!", 300, 310);
+    drawStartButton();
 }
 
 //--------------------------------------------------------------
@@ -82,9 +79,11 @@ void Handyman::mouseDragged(int x, int y, int button){
 void Handyman::mousePressed(int x, int y, int button){
     std::cout << "(" << x << ", " << y << ")" << std::endl;
     if (x >= 250 && x <= 400 && y >= 265 && y <= 340) {
+        if (isGameInProgress) {
+            game.reset();
+        }
         isGameInProgress = true;
         game.startGame();
-        std::cout << "game started" << std::endl;
     }
 }
 
@@ -230,4 +229,10 @@ ofVec2f Handyman::findAverageVelocity(ofVec2f averageVelocity) {
 
 void Handyman::stopDucking() {
     game.stopDucking();
+}
+
+void Handyman::drawStartButton() {
+    ofDrawRectRounded(250, 265, 150, 75, 25);
+    ofSetColor(0, 0, 0);
+    ofDrawBitmapString("Start!", 300, 310);
 }
