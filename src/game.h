@@ -29,7 +29,8 @@ public:
     void stopDucking();
     
 private:
-    int score;
+    float timer;
+    int millisecondsPassed;
     bool isGameInProgress;
     bool isGameOver;
     int minCactusDistance;
@@ -39,6 +40,7 @@ private:
     Ground ground1;
     Ground ground2;
     
+    void displayScore();
     void updateCactus();
     int randomNumber(int range);
     bool collisionOccurance();

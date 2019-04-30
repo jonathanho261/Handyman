@@ -9,12 +9,14 @@
 #include "game.h"
 
 GameEngine::GameEngine() {
-    score = 0;
     isGameInProgress = false;
     isGameOver = false;
 }
 
 void GameEngine::setup() {
+    timer = 0;
+    millisecondsPassed = 0;
+    
     dino.setup();
     ground1.setup(45, 445);
     ground2.setup(445, 445);
@@ -28,6 +30,7 @@ void GameEngine::setup() {
 
 void GameEngine::update() {
     if (isGameInProgress && !isGameOver) {
+        timer += 0.01;
         dino.update();
         ground1.update();
         ground2.update();
@@ -35,7 +38,6 @@ void GameEngine::update() {
         if (collisionOccurance()) {
             isGameOver = true;
         }
-        
     }
 }
 
@@ -47,6 +49,7 @@ void GameEngine::draw() {
     for (Cactus cactus : cacti) {
         cactus.draw();
     }
+    displayScore();
 }
 
 void GameEngine::startGame() {
@@ -65,6 +68,13 @@ void GameEngine::stopDucking() {
     dino.stopDucking();
 }
 
+void GameEngine::displayScore() {
+    int score = ((int) timer) % 100;
+    std::string scoreString = "Score: " + std::to_string(score);
+    ofSetColor(25, 25, 25);
+    ofDrawBitmapString(scoreString, 590, 380);
+    ofSetColor(255, 255, 255);
+}
 
 void GameEngine::updateCactus() {
     for (int i = 0; i < cacti.size(); i++) {
